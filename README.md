@@ -2,7 +2,11 @@
 
 A simple and elegant task management application built with the **MERN Stack** (MongoDB, Express.js, React.js, Node.js).
 
-## 📋 Features
+## � Live Demo
+
+**Try the app here:** https://task-manager-ram-5pi2.vercel.app/
+
+## �📋 Features
 
 ✅ **Create Tasks** - Add tasks with title and description
 ✅ **View Tasks** - Display all tasks in a clean interface
