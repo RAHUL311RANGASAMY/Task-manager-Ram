@@ -17,10 +17,12 @@ function TaskList({ refresh }) {
     try {
       setLoading(true);
       const response = await axios.get('/api/tasks');
-      setTasks(response.data);
+      const data = Array.isArray(response.data) ? response.data : [];
+      setTasks(data);
       setError('');
     } catch (err) {
       setError('Error fetching tasks. Make sure the backend server is running.');
+      setTasks([]);
       console.error(err);
     } finally {
       setLoading(false);
@@ -28,18 +30,18 @@ function TaskList({ refresh }) {
   };
 
   const handleTaskUpdated = (updatedTask) => {
-    setTasks(tasks.map(task => (task._id === updatedTask._id ? updatedTask : task)));
+    setTasks(Array.isArray(tasks) ? tasks.map(task => (task._id === updatedTask._id ? updatedTask : task)) : [updatedTask]);
   };
 
   const handleTaskDeleted = (taskId) => {
-    setTasks(tasks.filter(task => task._id !== taskId));
+    setTasks(Array.isArray(tasks) ? tasks.filter(task => task._id !== taskId) : []);
   };
 
-  const filteredTasks = tasks.filter(task => {
+  const filteredTasks = Array.isArray(tasks) ? tasks.filter(task => {
     if (filter === 'Completed') return task.status === 'Completed';
     if (filter === 'Pending') return task.status === 'Pending';
     return true;
-  });
+  }) : [];
 
   if (loading && tasks.length === 0) {
     return <div className="loading">Loading tasks...</div>;
@@ -56,19 +58,19 @@ function TaskList({ refresh }) {
           className={`filter-btn ${filter === 'All' ? 'active' : ''}`}
           onClick={() => setFilter('All')}
         >
-          All ({tasks.length})
+          All ({Array.isArray(tasks) ? tasks.length : 0})
         </button>
         <button
           className={`filter-btn ${filter === 'Pending' ? 'active' : ''}`}
           onClick={() => setFilter('Pending')}
         >
-          Pending ({tasks.filter(t => t.status === 'Pending').length})
+          Pending ({Array.isArray(tasks) ? tasks.filter(t => t.status === 'Pending').length : 0})
         </button>
         <button
           className={`filter-btn ${filter === 'Completed' ? 'active' : ''}`}
           onClick={() => setFilter('Completed')}
         >
-          Completed ({tasks.filter(t => t.status === 'Completed').length})
+          Completed ({Array.isArray(tasks) ? tasks.filter(t => t.status === 'Completed').length : 0})
         </button>
       </div>
 
