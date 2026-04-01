@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import API_URL from '../config';
 import TaskItem from './TaskItem';
 import './TaskList.css';
 
@@ -16,7 +17,7 @@ function TaskList({ refresh }) {
   const fetchTasks = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('/api/tasks');
+      const response = await axios.get(`${API_URL}/api/tasks`);
       const data = Array.isArray(response.data) ? response.data : [];
       setTasks(data);
       setError('');

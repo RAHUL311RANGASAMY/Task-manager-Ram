@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import API_URL from '../config';
 import './TaskForm.css';
 
 function TaskForm({ onTaskAdded }) {
@@ -31,7 +32,7 @@ function TaskForm({ onTaskAdded }) {
         return;
       }
 
-      const response = await axios.post('/api/tasks', formData);
+      const response = await axios.post(`${API_URL}/api/tasks`, formData);
       onTaskAdded(response.data);
       setFormData({ title: '', description: '', dueDate: '' });
     } catch (err) {

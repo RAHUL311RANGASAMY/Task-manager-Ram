@@ -1,11 +1,12 @@
 import React from 'react';
 import axios from 'axios';
+import API_URL from '../config';
 import './TaskItem.css';
 
 function TaskItem({ task, onTaskUpdated, onTaskDeleted }) {
   const handleStatusChange = async (e) => {
     try {
-      const updatedTask = await axios.put(`/api/tasks/${task._id}`, {
+      const updatedTask = await axios.put(`${API_URL}/api/tasks/${task._id}`, {
         ...task,
         status: e.target.value,
       });
@@ -18,7 +19,7 @@ function TaskItem({ task, onTaskUpdated, onTaskDeleted }) {
   const handleDelete = async () => {
     if (window.confirm('Are you sure you want to delete this task?')) {
       try {
-        await axios.delete(`/api/tasks/${task._id}`);
+        await axios.delete(`${API_URL}/api/tasks/${task._id}`);
         onTaskDeleted(task._id);
       } catch (error) {
         console.error('Error deleting task:', error);
