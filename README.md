@@ -4,7 +4,7 @@ A simple and elegant task management application built with the **MERN Stack** (
 
 ## � Live Demo
 
-**Try the app here:** https://task-manager-ram-5pi2.vercel.app/
+**Try the app here:** https://task-manager-ram.vercel.app/
 
 ## �📋 Features
 
