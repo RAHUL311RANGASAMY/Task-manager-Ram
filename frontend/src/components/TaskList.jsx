@@ -78,11 +78,13 @@ function TaskList({ refresh }) {
       <div className="tasks">
         {filteredTasks.length === 0 ? (
           <p className="no-tasks">No tasks found. Create one to get started!</p>
+          
         ) : (
           filteredTasks.map(task => (
             <TaskItem
               key={task._id}
               task={task}
+            
               onTaskUpdated={handleTaskUpdated}
               onTaskDeleted={handleTaskDeleted}
             />

@@ -11,6 +11,10 @@ const taskSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
+    assign:{
+      type: String,
+      trim: true,
+    },
     status: {
       type: String,
       enum: ['Pending', 'Completed'],

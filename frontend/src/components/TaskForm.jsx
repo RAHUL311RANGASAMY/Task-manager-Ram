@@ -7,6 +7,7 @@ function TaskForm({ onTaskAdded }) {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
+    assign: '',
     dueDate: '',
   });
   const [error, setError] = useState('');
@@ -34,7 +35,7 @@ function TaskForm({ onTaskAdded }) {
 
       const response = await axios.post(`${API_URL}/api/tasks`, formData);
       onTaskAdded(response.data);
-      setFormData({ title: '', description: '', dueDate: '' });
+      setFormData({ title: '', description: '',assign: '', dueDate: '' });
     } catch (err) {
       setError(err.response?.data?.message || 'Error creating task');
     } finally {
@@ -44,7 +45,7 @@ function TaskForm({ onTaskAdded }) {
 
   return (
     <form className="task-form" onSubmit={handleSubmit}>
-      <h2>Add New Task</h2>
+      <h2 >Add New Task</h2>
       {error && <div className="error-message">{error}</div>}
       
       <div className="form-group">
@@ -70,6 +71,18 @@ function TaskForm({ onTaskAdded }) {
           placeholder="Enter task description (optional)"
           rows="4"
         ></textarea>
+      </div>
+
+
+      <div className="form-group">
+      <label htmlFor='assign'>Assigned By</label>
+      <textarea
+       id="assign"
+       name="assign"
+       value={formData.assign}
+       onChange={handleChange}
+       placeholder="Enter the name of Assigner"
+       ></textarea>
       </div>
 
       <div className="form-group">

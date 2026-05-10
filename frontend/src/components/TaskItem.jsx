@@ -38,6 +38,7 @@ function TaskItem({ task, onTaskUpdated, onTaskDeleted }) {
       <div className="task-content">
         <h3 className="task-title">{task.title}</h3>
         {task.description && <p className="task-description">{task.description}</p>}
+        {task.assign && <p className="task-assign">{task.assign}</p>}
         <div className="task-meta">
           <span className="task-date">Due: {formatDate(task.dueDate)}</span>
         </div>

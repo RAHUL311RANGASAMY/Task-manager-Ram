@@ -5,7 +5,7 @@ const router = express.Router();
 // Create a new task
 router.post('/', async (req, res) => {
   try {
-    const { title, description, dueDate } = req.body;
+    const { title, description,assign,dueDate } = req.body;
 
     if (!title) {
       return res.status(400).json({ message: 'Title is required' });
@@ -14,6 +14,7 @@ router.post('/', async (req, res) => {
     const newTask = new Task({
       title,
       description: description || '',
+      assign: assign || '',
       dueDate: dueDate || null,
     });
 
@@ -50,11 +51,11 @@ router.get('/:id', async (req, res) => {
 // Update a task
 router.put('/:id', async (req, res) => {
   try {
-    const { title, description, status, dueDate } = req.body;
+    const { title, description, assign, status, dueDate } = req.body;
     
     const updatedTask = await Task.findByIdAndUpdate(
       req.params.id,
-      { title, description, status, dueDate },
+      { title, description, assign, status, dueDate },
       { new: true, runValidators: true }
     );
 
